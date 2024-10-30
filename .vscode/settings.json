@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "*.c": "c",
+        "stdio.h": "c",
+        "12_GAME.C": "cpp",
+        "MINOR.C": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}

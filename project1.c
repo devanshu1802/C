@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <time.h> // Include this header for time function
+#include <time.h> 
 
 #define MAX_TRIES 6
 #define WORD_LIST_SIZE 5
@@ -13,37 +13,37 @@ int checkGuess(char *word, char guess, int *guessed);
 void displayHangman(int tries);
 
 int main() {
-    char word[20]; // The word to guess
-    int guessed[20] = {0}; // Track guessed letters
-    char guess; // User's guess
-    int tries = 0; // Number of incorrect guesses
-    int correctGuesses = 0; // Count of correct letters guessed
+    char word[20]; 
+    int guessed[20] = {0}; 
+    char guess; 
+    int tries = 0; 
+    int correctGuesses = 0; 
 
-    srand(time(NULL)); // Seed the random number generator
+    srand(time(NULL)); 
 
-    chooseWord(word); // Choose a random word
+    chooseWord(word); 
 
-    // Game loop
+    
     while (tries < MAX_TRIES && correctGuesses < strlen(word)) {
         printf("\nCurrent Word: ");
-        displayWord(word, guessed); // Show the current state of the word
+        displayWord(word, guessed); 
         printf("\nGuess a letter: ");
-        scanf(" %c", &guess); // Read user input
-        guess = tolower(guess); // Convert to lowercase
+        scanf(" %c", &guess); 
+        guess = tolower(guess); 
 
-        // Check if the guess is correct
+        
         if (checkGuess(word, guess, guessed)) {
-            correctGuesses++; // Increase count of correct guesses
+            correctGuesses++; 
             printf("Good guess!\n");
         } else {
-            tries++; // Increase incorrect guess count
+            tries++; 
             printf("Wrong guess! You have %d tries left.\n", MAX_TRIES - tries);
         }
 
-        displayHangman(tries); // Display hangman status
+        displayHangman(tries); 
     }
 
-    // Check if the player won or lost
+    
     if (correctGuesses == strlen(word)) {
         printf("\nCongratulations! You've guessed the word: %s\n", word);
     } else {
@@ -53,36 +53,33 @@ int main() {
     return 0;
 }
 
-// Function to choose a random word
+
 void chooseWord(char *word) {
     const char *wordList[WORD_LIST_SIZE] = {"macbook", "worldcup", "computer", "science", "maths"};
-    strcpy(word, wordList[rand() % WORD_LIST_SIZE]); // Select a random word from the list
+    strcpy(word, wordList[rand() % WORD_LIST_SIZE]); 
 }
 
-// Function to display the current state of the word
 void displayWord(char *word, int *guessed) {
     for (int i = 0; i < strlen(word); i++) {
         if (guessed[i]) {
-            printf("%c ", word[i]); // Show the letter if guessed
+            printf("%c ", word[i]); 
         } else {
-            printf("_ "); // Show underscore if not guessed
+            printf("_ "); 
         }
     }
 }
 
-// Function to check if the guessed letter is in the word
 int checkGuess(char *word, char guess, int *guessed) {
-    int found = 0; // Flag to check if letter is found
+    int found = 0; 
     for (int i = 0; i < strlen(word); i++) {
         if (word[i] == guess) {
-            guessed[i] = 1; // Mark letter as guessed
-            found = 1; // Set found flag
+            guessed[i] = 1; 
+            found = 1; 
         }
     }
-    return found; // Return whether the guess was correct
+    return found; 
 }
 
-// Function to display the hangman based on the number of incorrect tries
 void displayHangman(int tries) {
     printf("\nHangman: \n");
     switch (tries) {
